@@ -136,6 +136,14 @@ wms.Source = L.Layer.extend({
         }
     },
 
+    'setWMSParams': function(params) {
+        // WARNING: This function does not update the image, but only sets new WMS parameters of the overlay responsible for map image loading.
+        // To update the image, call `layer.addTo()`, `layer.remove()`, or `wmsSource.refreshOverlay()` after calling this function.
+        if (!this._overlay) return;
+
+        this._overlay.setParams(params, false);
+    },
+
     'identify': function(evt) {
         // Identify map features in response to map clicks. To customize this
         // behavior, create a class extending wms.Source and override one or
@@ -336,9 +344,9 @@ wms.Overlay = L.Layer.extend({
         this.wmsParams = L.extend({}, this.defaultWmsParams, params);
     },
 
-    'setParams': function(params) {
+    'setParams': function(params, update) {
         L.extend(this.wmsParams, params);
-        this.update();
+        if (update !== false) this.update();
     },
 
     'getAttribution': function() {
