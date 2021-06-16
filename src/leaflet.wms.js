@@ -388,7 +388,8 @@ wms.Overlay = L.Layer.extend({
         // Keep current image overlay in place until new one loads
         // (inspired by esri.leaflet)
         var bounds = this._map.getBounds();
-        var overlay = L.imageOverlay(url, bounds, {'opacity': 0});
+        var urlWithAnticache = url + '&anticache=' + +new Date();
+        var overlay = L.imageOverlay(urlWithAnticache, bounds, {'opacity': 0});
         overlay.addTo(this._map);
         overlay.once('load', _swap, this);
         function _swap() {
