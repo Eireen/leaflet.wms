@@ -396,7 +396,7 @@ wms.Overlay = L.Layer.extend({
             if (!this._map) {
                 return;
             }
-            if (overlay._url != this._currentUrl) {
+            if (url != this._currentUrl) {
                 this._map.removeLayer(overlay);
                 return;
             } else if (this._currentOverlay) {
