@@ -396,7 +396,8 @@ wms.Overlay = L.Layer.extend({
             if (!this._map) {
                 return;
             }
-            if (url != this._currentUrl) {
+            var overlayUrlWithoutAnticache = overlay._url.replace(/&anticache=\d+/, '');
+            if (overlayUrlWithoutAnticache != this._currentUrl) {
                 this._map.removeLayer(overlay);
                 return;
             } else if (this._currentOverlay) {
